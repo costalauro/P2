@@ -1,0 +1,23 @@
+/                                        HomeR                     GET
+
+/funcionario                             FuncionarioR              POST
+/funcionario/buscar/#FuncionarioId       BuscarFuncionarioR        GET
+/funcionario/listar                      ListFuncionarioR          GET
+/funcionario/apagar/#FuncionarioId       ApagarFuncionarioR        DELETE
+/funcionario/alterar/#FuncionarioId      AlterarFuncionarioR       PUT
+/funcionario/alterar/nome/#FuncionarioId AlterarFuncionarioNomeR   PATCH
+
+/treinamento                        TreinamentoR        POST
+/treinamento/buscar/#TreinamentoId  BuscarTreinamentoR  GET
+/treinamento/listar                 ListTreinamentoR    GET
+/treinamento/apagar/#TreinamentoId  ApagarTreinamentoR  DELETE
+/treinamento/alterar/#TreinamentoId AlterarTreinamentoR PUT
+
+/profissao                      ProfissaoR        POST
+/profissao/buscar/#ProfissaoId  BuscarProfissaoR  GET
+/profissao/listar               ListProfissaoR    GET
+/profissao/apagar/#ProfissaoId  ApagarProfissaoR  DELETE
+/profissao/alterar/#ProfissaoId AlterarProfissaoR PUT
+
+/cadastro/#ProfissaoId       CadFuncProfR       POST
+/treinamento/#ProfissaoId    TreinamentoR       GET
