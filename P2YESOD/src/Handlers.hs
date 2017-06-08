@@ -92,3 +92,8 @@ getFuncionarioR pid = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+
+postFuncionarioR :: FuncionarioId -> Handler Html
+postFuncionarioR pid = do
+     runDB $ delete pid
+     redirect ListarR
