@@ -155,3 +155,16 @@ postDeptoR :: DepartamentoId -> Handler Html
 postDeptoR did = do
      runDB $ delete did
      redirect ListarDeptosR
+
+postCadDeptoR :: Handler Html
+postCadDeptoR = do
+                ((result, _), _) <- runFormPost formDepto
+                case result of
+                    FormSuccess depto -> do
+                       runDB $ insert depto
+                       defaultLayout [whamlet|
+                           <h1> #{departamentoNome depto} Inserido com sucesso!
+                           <a href=@{HomeR}> 
+                                Voltar
+                       |]
+                    _ -> redirect CadDeptoR
