@@ -210,3 +210,8 @@ getProfissaoR pid = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+
+postProfissaoR :: ProfissaoId -> Handler Html
+postProfissaoR pid = do
+     runDB $ delete pid
+     redirect ListarProfissoesR
