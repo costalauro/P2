@@ -15,10 +15,10 @@ formFuncionario :: Form Funcionario
 formFuncionario = renderDivs $ Funcionario <$>
              areq textField "Nome :" Nothing <*>
              areq intField "Idade :" Nothing <*>
-             areq doubleField "Sal·rio :" Nothing <*>
+             areq doubleField "Sal√°rio :" Nothing <*>
              areq dayField "Data Nascimento :" Nothing <*>
              areq (selectField dptos) "Departamentos :" Nothing <*>
-             areq (selectField profs) "Profissıes :" Nothing
+             areq (selectField profs) "Profiss√µes :" Nothing
 
 dptos = do
        entidades <- runDB $ selectList [] [Asc DepartamentoNome] 
@@ -28,4 +28,11 @@ profs = do
        entidades <- runDB $ selectList [] [Asc ProfissaoNome] 
        optionsPairs $ fmap (\ent -> (profissaoSigla $ entityVal ent, entityKey ent)) entidades
 
-             
+formDepto :: Form Departamento
+formDepto = renderDivs $ Departamento <$>
+            areq textField "Nome :" Nothing <*>
+            areq textField FieldSettings{fsId=Just "hident2",
+                           fsLabel="Sigla :",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","3")]} Nothing
