@@ -8,3 +8,12 @@
 /listarDeptos  ListarDeptosR GET
 /listarTreinamentos ListarTreinamentosR GET
 /listarProfissoes ListarProfissoesR GET
+
+/funcionario/#FuncionarioId FuncionarioR    GET POST
+/depto/#DepartamentoId   DeptoR      GET POST
+/treinamento/#TreinamentoId TreinamentoR    GET POST
+/profissao/#ProfissaoId   ProfissaoR      GET POST
+
+
+/                 HomeR      GET
+/hello            HelloR     GET
