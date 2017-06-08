@@ -24,6 +24,7 @@ Treinamento
    sala Text
    sigla Text sqltype=varchar(10)
    qtdPessoas Int
+   profid ProfissaoId
    dataVal Day
    dataAplic Day
    deriving Show
@@ -34,5 +35,19 @@ Funcionario
    salario Double
    dataNasc Day
    deptoid DepartamentoId
+   profid ProfissaoId
    deriving Show
+
+Profissao
+   nome Text
+   sigla Text sqltype=varchar(10)
+   deptoid DepartamentoId
+   deriving Show
+   
+Usuario
+   nome Text
+   email Text
+   senha Text
+   UniqueEmail email
+|]
 
