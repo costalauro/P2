@@ -54,3 +54,20 @@ getLoginR = do
                 <a href=@{HomeR}> 
                     Voltar
                 |]
+
+postLoginR :: Handler Html
+postLoginR = do
+                ((result, _), _) <- runFormPost formLogin
+                case result of
+                    FormSuccess ("root@root.com","root2") -> do
+                        setSession "_USER" "admin"
+                        redirect HomeR
+                    FormSuccess (email,senha) -> do
+                       temUsu <- runDB $ selectFirst [UsuarioEmail ==. email,UsuarioSenha ==. senha] []
+                       case temUsu of
+                           Nothing -> do
+                               setMessage [shamlet| <p> Usuário ou senha inválido |]
+                               redirect LoginR
+                               setSession "_USER" email
+                               defaultLayout [whamlet| Usuário autenticado!|]
+                    _ -> redirect HomeR
