@@ -61,3 +61,8 @@ formTreinamento = renderDivs $ Treinamento <$>
             areq (selectField profs) "Profissões :" Nothing <*>
             areq dayField "Data Aplicacao :" Nothing <*>
             areq dayField "Data Validade :" Nothing
+
+getHelloR :: Handler Html
+getHelloR = defaultLayout [whamlet|
+     <h1> _{MsgHello}
+|]
