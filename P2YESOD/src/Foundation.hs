@@ -51,3 +51,9 @@ Usuario
    UniqueEmail email
 |]
 
+staticFiles "static"
+
+mkYesodData "Sitio" $(parseRoutesFile "config/routes")
+
+mkMessage "Sitio" "messages" "pt-BR"
+
