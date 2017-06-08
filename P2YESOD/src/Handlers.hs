@@ -228,3 +228,33 @@ postCadProfissaoR = do
                                Voltar
                        |]
                     _ -> redirect CadProfissaoR
+
+getListarProfissoesR :: Handler Html
+getListarProfissoesR = do
+             listaProfissaoP <- runDB $ selectList [] [Asc ProfissaoNome]
+             defaultLayout $ do 
+             [whamlet|
+                 <h1> Profissões cadastradas:
+                 $forall Entity pid profissao <- listaProfissaoP
+                     <a href=@{ProfissaoR pid}> #{profissaoNome profissao} 
+                     <form method=post action=@{ProfissaoR pid}> 
+                         <input type="submit" value="Deletar"><br>
+                     
+             |] 
+             [whamlet|
+                 <a href=@{HomeR}> 
+                        Voltar    
+             |] 
+             toWidget [lucius|
+                form  { display:inline; }
+             |]
+             
+getCadTreinamentoR :: Handler Html
+getCadTreinamentoR = do
+             (widget, enctype) <- generateFormPost formTreinamento
+             defaultLayout $ do
+             widgetForm CadTreinamentoR enctype widget "Cadastro de treinamentos"
+             [whamlet|
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
