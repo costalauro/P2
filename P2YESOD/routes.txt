@@ -1,0 +1,5 @@
+/cadastro         CadastroR  GET POST
+/depto            CadDeptoR     GET POST
+/profissao        CadProfissaoR     GET POST
+/treinamento      CadTreinamentoR   GET POST
+/static           StaticR    Static getStatic
