@@ -77,3 +77,18 @@ getCadastroR = do
                     <a href=@{HomeR}> 
                         Voltar
                  |]
+
+getFuncionarioR :: FuncionarioId -> Handler Html
+getFuncionarioR pid = do
+             funcionario <- runDB $ get404 pid 
+             dpto <- runDB $ get404 (funcionarioDeptoid funcionario)
+             prof <- runDB $ get404 (funcionarioProfid funcionario)
+             defaultLayout [whamlet| 
+                 <h1> Funcionário: #{funcionarioNome funcionario}
+                 <p> Salario: #{funcionarioSalario funcionario}
+                 <p> Idade: #{funcionarioIdade funcionario}
+                 <p> Departamento: #{departamentoNome dpto}
+                 <p> Profissão: #{profissaoNome prof}
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
