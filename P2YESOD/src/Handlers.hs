@@ -46,3 +46,18 @@ formProfissao = renderDivs $ Profissao <$>
                            fsName= Nothing,
                            fsAttrs=[("maxlength","10")]} Nothing <*>
             areq (selectField dptos) "Departamentos :" Nothing
+            
+formTreinamento :: Form Treinamento
+formTreinamento = renderDivs $ Treinamento <$>
+            areq textField "Nome :" Nothing <*>
+            areq textField FieldSettings{fsId=Just "hident2",
+                           fsLabel="Abreviação :",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","10")]} Nothing <*>
+            areq textField "Responsavel :" Nothing <*>
+            areq textField "Sala :" Nothing <*>
+            areq intField "Qtd. Pessoas :" Nothing <*>
+            areq (selectField profs) "Profissões :" Nothing <*>
+            areq dayField "Data Aplicacao :" Nothing <*>
+            areq dayField "Data Validade :" Nothing
