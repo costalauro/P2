@@ -140,3 +140,13 @@ getCadDeptoR = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+             
+getDeptoR :: DepartamentoId -> Handler Html
+getDeptoR did = do
+             departamento <- runDB $ get404 did 
+             defaultLayout [whamlet| 
+                 <h1> Departamento: #{departamentoNome departamento}
+                 <p> Sigla: #{departamentoSigla departamento}
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
