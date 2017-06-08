@@ -117,3 +117,16 @@ getListarR = do
              toWidget [lucius|
                 form  { display:inline; }
              |]
+
+postCadastroR :: Handler Html
+postCadastroR = do
+                ((result, _), _) <- runFormPost formFuncionario
+                case result of
+                    FormSuccess funcionario -> do
+                       runDB $ insert funcionario 
+                       defaultLayout [whamlet| 
+                           <h1> #{funcionarioNome funcionario} Inserido com sucesso!
+                           <a href=@{HomeR}> 
+                                Voltar
+                       |]
+                    _ -> redirect HomeR
