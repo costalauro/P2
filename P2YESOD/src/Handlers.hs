@@ -215,3 +215,16 @@ postProfissaoR :: ProfissaoId -> Handler Html
 postProfissaoR pid = do
      runDB $ delete pid
      redirect ListarProfissoesR
+
+postCadProfissaoR :: Handler Html
+postCadProfissaoR = do
+                ((result, _), _) <- runFormPost formProfissao
+                case result of
+                    FormSuccess profissao -> do
+                       runDB $ insert profissao
+                       defaultLayout [whamlet|
+                           <h1> #{profissaoNome profissao} Inserida com sucesso! 
+                           <a href=@{HomeR}> 
+                               Voltar
+                       |]
+                    _ -> redirect CadProfissaoR
