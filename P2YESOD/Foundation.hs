@@ -27,3 +27,10 @@ Treinamento
    dataVal Day
    dataAplic Day
    deriving Show
+
+Funcionario
+   nome Text
+   idade Int
+   salario Double
+   dataNasc Day
+   deriving Show
