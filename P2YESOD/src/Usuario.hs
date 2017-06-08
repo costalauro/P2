@@ -39,3 +39,18 @@ postUsuarioR = do
                                       |]
                     _ -> redirect UsuarioR
                     
+getLoginR :: Handler Html
+getLoginR = do
+            (widget, enctype) <- generateFormPost formLogin
+            msgComMaybe <- getMessage
+            defaultLayout $ do 
+                [whamlet|
+                    $maybe msg <- msgComMaybe 
+                        <h2>
+                            #{msg}
+                |]
+                widgetForm LoginR enctype widget "Login"
+                [whamlet|
+                <a href=@{HomeR}> 
+                    Voltar
+                |]
