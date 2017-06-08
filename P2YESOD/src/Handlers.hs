@@ -168,3 +168,23 @@ postCadDeptoR = do
                                 Voltar
                        |]
                     _ -> redirect CadDeptoR
+
+getListarDeptosR :: Handler Html
+getListarDeptosR = do
+             listaDptoP <- runDB $ selectList [] [Asc DepartamentoNome]
+             defaultLayout $ do 
+             [whamlet|
+                 <h1> Departamentos cadastrados:
+                 $forall Entity did departamento <- listaDptoP
+                     <a href=@{DeptoR did}> #{departamentoNome departamento} 
+                     <form method=post action=@{DeptoR did}> 
+                         <input type="submit" value="Deletar"><br>
+                     
+             |] 
+             [whamlet|
+                 <a href=@{HomeR}> 
+                        Voltar    
+             |] 
+             toWidget [lucius|
+                form  { display:inline; }
+             |]
