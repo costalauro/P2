@@ -290,3 +290,24 @@ postCadTreinamentoR = do
                                Voltar
                        |]
                     _ -> redirect CadTreinamentoR
+
+getListarTreinamentosR :: Handler Html
+getListarTreinamentosR = do
+             listaTreinamentoP <- runDB $ selectList [] [Asc TreinamentoNome]
+             defaultLayout $ do 
+             [whamlet|
+                 <h1> Treinamentos cadastrados:
+                 $forall Entity tid treinamento <- listaTreinamentoP
+                     <a href=@{TreinamentoR tid}> #{treinamentoNome treinamento} 
+                     <form method=post action=@{TreinamentoR tid}> 
+                         <input type="submit" value="Deletar"><br>
+                     
+             |] 
+             [whamlet|
+                 <a href=@{HomeR}> 
+                        Voltar    
+             |] 
+             toWidget [lucius|
+                form  { display:inline; }
+             |]
+             
