@@ -57,3 +57,16 @@ mkYesodData "Sitio" $(parseRoutesFile "config/routes")
 
 mkMessage "Sitio" "messages" "pt-BR"
 
+instance YesodPersist Sitio where
+   type YesodPersistBackend Sitio = SqlBackend
+   runDB f = do
+       master <- getYesod
+       let pool = connPool master
+       runSqlPool f pool
+
+instance Yesod Sitio where
+    authRoute _ = Just LoginR
+    isAuthorized LoginR _ = return Authorized
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized UsuarioR _ = isAdmin
+    isAuthorized _ _ = isUser
