@@ -18,6 +18,7 @@ Departamento
    sigla Text sqltype=varchar(3)
    deriving Show
 
+
 Treinamento
    nome Text
    responsavel Text
