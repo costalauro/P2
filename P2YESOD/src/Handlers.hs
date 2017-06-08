@@ -97,3 +97,23 @@ postFuncionarioR :: FuncionarioId -> Handler Html
 postFuncionarioR pid = do
      runDB $ delete pid
      redirect ListarR
+
+getListarR :: Handler Html
+getListarR = do
+             listaP <- runDB $ selectList [] [Asc FuncionarioNome]
+             defaultLayout $ do 
+             [whamlet|
+                 <h1> Funcionários cadastradas:
+                 $forall Entity pid funcionario <- listaP
+                     <a href=@{FuncionarioR pid}> #{funcionarioNome funcionario} 
+                     <form method=post action=@{FuncionarioR pid}> 
+                         <input type="submit" value="Deletar"><br>
+                     
+             |] 
+             [whamlet|
+                 <a href=@{HomeR}> 
+                        Voltar    
+             |] 
+             toWidget [lucius|
+                form  { display:inline; }
+             |]
