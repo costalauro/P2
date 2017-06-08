@@ -188,3 +188,25 @@ getListarDeptosR = do
              toWidget [lucius|
                 form  { display:inline; }
              |]
+             
+getCadProfissaoR :: Handler Html
+getCadProfissaoR = do
+             (widget, enctype) <- generateFormPost formProfissao
+             defaultLayout $ do
+             widgetForm CadProfissaoR enctype widget "Profissaos"
+             [whamlet|
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]           
+             
+getProfissaoR :: ProfissaoId -> Handler Html
+getProfissaoR pid = do
+             profissao <- runDB $ get404 pid 
+             dpto <- runDB $ get404 (profissaoDeptoid profissao)
+             defaultLayout [whamlet| 
+                 <h1> Profissão #{profissaoNome profissao}
+                 <p> Abreviação #{profissaoSigla profissao}                 
+                 <p> Departamento: #{departamentoNome dpto}
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
