@@ -71,3 +71,8 @@ postLoginR = do
                                setSession "_USER" email
                                defaultLayout [whamlet| Usuário autenticado!|]
                     _ -> redirect HomeR
+
+postLogoutR :: Handler Html
+postLogoutR = do
+    deleteSession "_USER"
+    redirect LoginR
