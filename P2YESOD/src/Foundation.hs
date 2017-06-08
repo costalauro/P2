@@ -70,3 +70,24 @@ instance Yesod Sitio where
     isAuthorized HomeR _ = return Authorized
     isAuthorized UsuarioR _ = isAdmin
     isAuthorized _ _ = isUser
+
+isAdmin = do
+    mu <- lookupSession "_USER"
+    return $ case mu of
+        Nothing -> AuthenticationRequired
+        Just "admin" -> Authorized
+        Just _ -> Unauthorized "Soh o admin acessa aqui!"
+
+isUser = do
+    mu <- lookupSession "_USER"
+    return $ case mu of
+        Nothing -> AuthenticationRequired
+        Just _ -> Authorized
+
+type Form a = Html -> MForm Handler (FormResult a, Widget)
+
+instance RenderMessage Sitio FormMessage where
+    renderMessage _ _ = defaultFormMessage
+
+widgetForm :: Route Sitio -> Enctype -> Widget -> Text -> Widget
+widgetForm x enctype widget y = $(whamletFile "templates/form.hamlet")
