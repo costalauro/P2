@@ -17,3 +17,7 @@
 
 /                 HomeR      GET
 /hello            HelloR     GET
+
+/usuario          UsuarioR   GET POST
+/login            LoginR     GET POST
+/logout           LogoutR    POST
