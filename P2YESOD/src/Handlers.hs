@@ -277,3 +277,16 @@ postTreinamentoR :: TreinamentoId -> Handler Html
 postTreinamentoR tid = do
      runDB $ delete tid
      redirect ListarTreinamentosR
+
+postCadTreinamentoR :: Handler Html
+postCadTreinamentoR = do
+                ((result, _), _) <- runFormPost formTreinamento
+                case result of
+                    FormSuccess treinamento -> do
+                       runDB $ insert treinamento
+                       defaultLayout [whamlet|
+                           <h1> Inserido #{treinamentoNome treinamento} com sucesso! 
+                           <a href=@{HomeR}> 
+                               Voltar
+                       |]
+                    _ -> redirect CadTreinamentoR
