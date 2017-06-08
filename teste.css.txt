@@ -1,0 +1,12 @@
+h1 {
+    cursor:pointer;
+}
+body{
+    vertical-align: top;
+}
+footer{
+    vertical-align: bottom;
+}
+a{
+    font-size:medium;
+}
