@@ -66,3 +66,14 @@ getHelloR :: Handler Html
 getHelloR = defaultLayout [whamlet|
      <h1> _{MsgHello}
 |]
+
+getCadastroR :: Handler Html
+getCadastroR = do
+             (widget, enctype) <- generateFormPost formFuncionario
+             defaultLayout $ do 
+                 addStylesheet $ StaticR teste_css
+                 widgetForm CadastroR enctype widget "Cadastrar Funcionário"
+                 [whamlet|
+                    <a href=@{HomeR}> 
+                        Voltar
+                 |]
