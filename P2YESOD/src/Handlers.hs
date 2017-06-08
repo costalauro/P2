@@ -258,3 +258,17 @@ getCadTreinamentoR = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+             
+getTreinamentoR :: TreinamentoId -> Handler Html
+getTreinamentoR tid = do
+             treinamento <- runDB $ get404 tid 
+             prof <- runDB $ get404 (treinamentoProfid treinamento)
+             defaultLayout [whamlet| 
+                 <h1> Treinamento #{treinamentoNome treinamento}
+                 <p> Responsável #{treinamentoResponsavel treinamento}                 
+                 <p> Sala #{treinamentoSala treinamento}
+                 <p> Qtd. Pessoas #{treinamentoQtdPessoas treinamento}
+                 <p> Profissão do Treinamento #{profissaoNome prof}
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
