@@ -130,3 +130,13 @@ postCadastroR = do
                                 Voltar
                        |]
                     _ -> redirect HomeR
+                    
+getCadDeptoR :: Handler Html
+getCadDeptoR = do
+             (widget, enctype) <- generateFormPost formDepto
+             defaultLayout $ do
+             widgetForm CadDeptoR enctype widget "Departamentos"
+             [whamlet|
+                    <a href=@{HomeR}> 
+                        Voltar
+             |]
