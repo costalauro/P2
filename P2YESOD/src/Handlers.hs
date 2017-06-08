@@ -272,3 +272,8 @@ getTreinamentoR tid = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+             
+postTreinamentoR :: TreinamentoId -> Handler Html
+postTreinamentoR tid = do
+     runDB $ delete tid
+     redirect ListarTreinamentosR
