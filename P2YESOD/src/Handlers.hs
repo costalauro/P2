@@ -150,3 +150,8 @@ getDeptoR did = do
                     <a href=@{HomeR}> 
                         Voltar
              |]
+
+postDeptoR :: DepartamentoId -> Handler Html
+postDeptoR did = do
+     runDB $ delete did
+     redirect ListarDeptosR
