@@ -18,7 +18,6 @@ Departamento
    sigla Text sqltype=varchar(3)
    deriving Show
 
-
 Treinamento
    nome Text
    responsavel Text
@@ -34,4 +33,6 @@ Funcionario
    idade Int
    salario Double
    dataNasc Day
+   deptoid DepartamentoId
    deriving Show
+
