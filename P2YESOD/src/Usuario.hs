@@ -25,3 +25,17 @@ getUsuarioR :: Handler Html
 getUsuarioR = do
             (widget, enctype) <- generateFormPost formUsu
             defaultLayout $ widgetForm UsuarioR enctype widget "Cadastro de Usuários"
+
+postUsuarioR :: Handler Html
+postUsuarioR = do
+                ((result, _), _) <- runFormPost formUsu
+                case result of
+                    FormSuccess usu -> do
+                       usuLR <- runDB $ insertBy usu
+                       case usuLR of
+                           Left _ -> redirect UsuarioR
+                           Right _ -> defaultLayout [whamlet|
+                                          <h1> #{usuarioNome usu} Inseridx com sucesso. 
+                                      |]
+                    _ -> redirect UsuarioR
+                    
