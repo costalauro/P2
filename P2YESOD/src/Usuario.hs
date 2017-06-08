@@ -21,3 +21,7 @@ formLogin = renderDivs $ (,) <$>
              areq emailField "E-mail" Nothing <*>
              areq passwordField "Senha" Nothing 
 
+getUsuarioR :: Handler Html
+getUsuarioR = do
+            (widget, enctype) <- generateFormPost formUsu
+            defaultLayout $ widgetForm UsuarioR enctype widget "Cadastro de Usuários"
